@@ -11,6 +11,10 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    private String TEXT_RESET  = "\u001B[0m";
+    private String YELLOW = "\u001B[33m";
+    private String RED = "\u001B[31m";
+    private String GREEN = "\u001B[32m";
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -43,12 +47,12 @@ public class Town {
      */
     public void hunterArrives(Hunter hunter) {
         this.hunter = hunter;
-        printMessage = "Welcome to town, " + hunter.getHunterName() + ".";
+        printMessage = YELLOW + "Welcome to town, " + hunter.getHunterName() + "." + TEXT_RESET;
 
         if (toughTown) {
-            printMessage += "\nIt's pretty rough around here, so watch yourself.";
+            printMessage += YELLOW + "\nIt's pretty rough around here, so watch yourself." + TEXT_RESET;
         } else {
-            printMessage += "\nWe're just a sleepy little town with mild mannered folk.";
+            printMessage += YELLOW + "\nWe're just a sleepy little town with mild mannered folk." + TEXT_RESET;
         }
     }
 
@@ -61,16 +65,16 @@ public class Town {
         boolean canLeaveTown = terrain.canCrossTerrain(hunter);
         if (canLeaveTown) {
             String item = terrain.getNeededItem();
-            printMessage = "You used your " + item + " to cross the " + terrain.getTerrainName() + ".";
+            printMessage = YELLOW + "You used your " + item + " to cross the " + terrain.getTerrainName() + "." + TEXT_RESET;
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
-                printMessage += "\nUnfortunately, your " + item + " broke.";
+                printMessage += YELLOW + "\nUnfortunately, your " + item + " broke." + TEXT_RESET;
             }
 
             return true;
         }
 
-        printMessage = "You can't leave town, " + hunter.getHunterName() + ". You don't have a " + terrain.getNeededItem() + ".";
+        printMessage = RED + "You can't leave town, " + hunter.getHunterName() + ". You don't have a " + terrain.getNeededItem() + "." + TEXT_RESET;
         return false;
     }
 
@@ -97,17 +101,17 @@ public class Town {
         }
 
         if (Math.random() > noTroubleChance) {
-            printMessage = "You couldn't find any trouble";
+            printMessage = RED + "You couldn't find any trouble" + TEXT_RESET;
         } else {
             printMessage = "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
             int goldDiff = (int) (Math.random() * 10) + 1;
             if (Math.random() > noTroubleChance) {
-                printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
-                printMessage += "\nYou won the brawl and receive " + goldDiff + " gold.";
+                printMessage += GREEN + "Okay, stranger! You proved yer mettle. Here, take my gold." + TEXT_RESET;
+                printMessage += GREEN + "\nYou won the brawl and receive " + goldDiff + " gold." + TEXT_RESET;
                 hunter.changeGold(goldDiff);
             } else {
-                printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
-                printMessage += "\nYou lost the brawl and pay " + goldDiff + " gold.";
+                printMessage += RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!" + TEXT_RESET;
+                printMessage += RED + "\nYou lost the brawl and pay " + goldDiff + " gold." + TEXT_RESET;
                 hunter.changeGold(-goldDiff);
             }
         }

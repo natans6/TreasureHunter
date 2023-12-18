@@ -16,7 +16,10 @@ public class TreasureHunter {
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
-
+    private String TEXT_RESET  = "\u001B[0m";
+    private String BLUE = "\u001B[34m";
+    private String RED = "\u001B[31m";
+    private String GREEN = "\u001B[32m";
     /**
      * Constructs the Treasure Hunter game.
      */
@@ -100,13 +103,13 @@ public class TreasureHunter {
             System.out.println("***");
             System.out.println(hunter);
             System.out.println(currentTown);
-            System.out.println("(B)uy something at the shop.");
-            System.out.println("(S)ell something at the shop.");
-            System.out.println("(M)ove on to a different town.");
-            System.out.println("(L)ook for trouble!");
-            System.out.println("Give up the hunt and e(X)it.");
+            System.out.println(BLUE + "(B)uy something at the shop." + TEXT_RESET);
+            System.out.println(BLUE + "(S)ell something at the shop." + TEXT_RESET);
+            System.out.println(BLUE + "(M)ove on to a different town." + TEXT_RESET);
+            System.out.println(BLUE + "(L)ook for trouble!" + TEXT_RESET);
+            System.out.println(RED + "Give up the hunt and e(X)it." + TEXT_RESET);
             System.out.println();
-            System.out.print("What's your next move? ");
+            System.out.print(GREEN + "What's your next move? " + TEXT_RESET);
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice);
         }
