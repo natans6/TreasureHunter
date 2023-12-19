@@ -68,7 +68,7 @@ public class Town {
             printMessage = YELLOW + "You used your " + item + " to cross the " + terrain.getTerrainName() + "." + TEXT_RESET;
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
-                printMessage += YELLOW + "\nUnfortunately, your " + item + " broke." + TEXT_RESET;
+                printMessage += YELLOW + "\nUnfortunately, you lost your " + item + "." + TEXT_RESET;
             }
 
             return true;
@@ -85,6 +85,7 @@ public class Town {
      */
     public void enterShop(String choice) {
         shop.enter(hunter, choice);
+        printMessage = "You left the shop.";
     }
 
     /**
