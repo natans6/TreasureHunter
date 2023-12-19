@@ -116,6 +116,7 @@ public class TreasureHunter {
             System.out.println(BLUE + "(S)ell something at the shop." + TEXT_RESET);
             System.out.println(BLUE + "(M)ove on to a different town." + TEXT_RESET);
             System.out.println(BLUE + "(L)ook for trouble!" + TEXT_RESET);
+            System.out.println(BLUE + "(H)unt for treasure!" + TEXT_RESET);
             System.out.println(RED + "Give up the hunt and e(X)it." + TEXT_RESET);
             System.out.println();
             System.out.print(GREEN + "What's your next move? " + TEXT_RESET);
@@ -147,6 +148,8 @@ public class TreasureHunter {
             }
         } else if (choice.equals("l")) {
             currentTown.lookForTrouble();
+        } else if(choice.equals("h")){
+              System.out.println("You found " + currentTown.getTreasure());
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
         } else {

@@ -11,6 +11,10 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    int treasureNum = (int) (Math.random() * 4);
+    private String treasure;
+
+
     private String TEXT_RESET  = "\u001B[0m";
     private String YELLOW = "\u001B[33m";
     private String RED = "\u001B[31m";
@@ -34,6 +38,18 @@ public class Town {
 
         // higher toughness = more likely to be a tough town
         toughTown = (Math.random() < toughness);
+        if(treasureNum==0){
+            treasure = "A crown";
+        }
+        if(treasureNum==1){
+            treasure = "A trophy";
+        }
+        if(treasureNum==2){
+            treasure = "A gem";
+        }
+        if(treasureNum==3){
+            treasure = "dust";
+        }
     }
 
     public String getLatestNews() {
@@ -141,6 +157,9 @@ public class Town {
         } else {
             return new Terrain("Marsh", "Boots");
         }
+    }
+    public String getTreasure(){
+        return treasure;
     }
 
     /**
