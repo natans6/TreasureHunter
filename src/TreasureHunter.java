@@ -53,12 +53,13 @@ public class TreasureHunter {
         String hard = SCANNER.nextLine().toLowerCase();
 
         if (hard.equals("test")) {
-            hunter = new Hunter(name, 105);
+            hunter = new Hunter(name, 106);
             hunter.buyItem("water", 1);
             hunter.buyItem("rope", 1);
             hunter.buyItem("machete", 1);
             hunter.buyItem("horse", 1);
             hunter.buyItem("boat", 1);
+            hunter.buyItem("boots", 1);
         } else if (hard.equals("y")) {
             hunter = new Hunter(name, 10);
             hardMode = true;
