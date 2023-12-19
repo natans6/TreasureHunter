@@ -121,7 +121,15 @@ public class TreasureHunter {
             System.out.print(GREEN + "What's your next move? " + TEXT_RESET);
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice);
+            if (hunter.getGold() < 0){
+                System.out.println();
+                System.out.println(currentTown.getLatestNews());
+                System.out.println("***");
+                System.out.println(hunter);
+                break;
+            }
         }
+        System.out.println("Game Over!");
     }
 
     /**
