@@ -14,7 +14,7 @@ public class Town {
     int treasureNum = (int) (Math.random() * 4);
     private String treasure;
 
-
+    private boolean checkedTown;
     private String TEXT_RESET  = "\u001B[0m";
     private String YELLOW = "\u001B[33m";
     private String RED = "\u001B[31m";
@@ -26,13 +26,15 @@ public class Town {
      * @param shop The town's shoppe.
      * @param toughness The surrounding terrain.
      */
-    public Town(Shop shop, double toughness) {
+    public Town(Shop shop, double toughness, boolean checkedTown) {
         this.shop = shop;
         this.terrain = getNewTerrain();
 
         // the hunter gets set using the hunterArrives method, which
         // gets called from a client class
         hunter = null;
+
+        checkedTown = false;
 
         printMessage = "";
 
@@ -55,7 +57,12 @@ public class Town {
     public String getLatestNews() {
         return printMessage;
     }
-
+    public boolean getCheckedTown(){
+        return checkedTown;
+    }
+    public void setCheckedTown(boolean newCheckedTown){
+        checkedTown = newCheckedTown;
+    }
     /**
      * Assigns an object to the Hunter in town.
      *
@@ -92,6 +99,10 @@ public class Town {
 
         printMessage = RED + "You can't leave town, " + hunter.getHunterName() + ". You don't have a " + terrain.getNeededItem() + "." + TEXT_RESET;
         return false;
+    }
+
+    public String getPrintMessage(){
+        return printMessage;
     }
 
     /**
