@@ -53,13 +53,14 @@ public class TreasureHunter {
         String hard = SCANNER.nextLine().toLowerCase();
 
         if (hard.equals("test")) {
-            hunter = new Hunter(name, 106);
+            hunter = new Hunter(name, 107);
             hunter.buyItem("water", 1);
             hunter.buyItem("rope", 1);
             hunter.buyItem("machete", 1);
             hunter.buyItem("horse", 1);
             hunter.buyItem("boat", 1);
             hunter.buyItem("boots", 1);
+            hunter.buyItem("shovel", 1);
         } else if (hard.equals("y")) {
             hunter = new Hunter(name, 10);
             hardMode = true;
@@ -90,7 +91,7 @@ public class TreasureHunter {
         // creating the new Town -- which we need to store as an instance
         // variable in this class, since we need to access the Town
         // object in other methods of this class
-        currentTown = new Town(shop, toughness);
+        currentTown = new Town(shop, toughness, true);
 
         // calling the hunterArrives method, which takes the Hunter
         // as a parameter; note this also could have been done in the
@@ -118,6 +119,7 @@ public class TreasureHunter {
             System.out.println(BLUE + "(M)ove on to a different town." + TEXT_RESET);
             System.out.println(BLUE + "(L)ook for trouble!" + TEXT_RESET);
             System.out.println(BLUE + "(H)unt for treasure!" + TEXT_RESET);
+            System.out.println(BLUE + "(D)ig for gold!" + TEXT_RESET);
             System.out.println(RED + "Give up the hunt and e(X)it." + TEXT_RESET);
             System.out.println();
             System.out.print(GREEN + "What's your next move? " + TEXT_RESET);
@@ -150,6 +152,9 @@ public class TreasureHunter {
         } else if (choice.equals("l")) {
             currentTown.lookForTrouble();
         } else if(choice.equals("h")){
+            System.out.println("You found " + currentTown.getTreasure());
+        } else if (choice.equals("d")){
+            hunter.digForGold();
             if(!currentTown.getSearched()) {
                 System.out.println("You found " + currentTown.getTreasure());
                 hunter.addTreasure(currentTown.getTreasure());
