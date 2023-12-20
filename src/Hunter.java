@@ -8,6 +8,8 @@ public class Hunter {
     //instance variables
     private String hunterName;
     private String[] kit;
+
+    private String[] treasureList;
     private int gold;
 
     /**
@@ -19,6 +21,7 @@ public class Hunter {
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
         kit = new String[6]; // only 6 possible items can be stored in kit with boots
+        treasureList = new String[3];
         gold = startingGold;
     }
 
@@ -199,4 +202,46 @@ public class Hunter {
 
         return -1;
     }
+    private int findItemInTreasureList(String treasure) {
+        for (int i = 0; i < treasureList.length; i++) {
+            String tmpItem = treasureList[i];
+
+            if (treasure.equals(tmpItem)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+    private boolean treasureListIsEmpty() {
+        for (String string : treasureList) {
+            if (string != null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    private int emptyPositionInTreasureList() {
+        for (int i = 0; i < treasureList.length; i++) {
+            if (treasureList[i] == null) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+    public void addTreasure(String treasure){
+        boolean contains = false;
+
+
+            if(findItemInTreasureList(treasure)!=-1){
+                System.out.println("You won't collect this because you already have it but the town is searched.");
+            }else if(treasure.equals("dust")){
+                System.out.println("This will not be added to your treasure list.");
+            }
+            else{
+                treasureList[emptyPositionInTreasureList()] = treasure;
+            }
+        }
 }

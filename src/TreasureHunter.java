@@ -150,7 +150,16 @@ public class TreasureHunter {
         } else if (choice.equals("l")) {
             currentTown.lookForTrouble();
         } else if(choice.equals("h")){
-              System.out.println("You found " + currentTown.getTreasure());
+            if(!currentTown.getSearched()) {
+                System.out.println("You found " + currentTown.getTreasure());
+                hunter.addTreasure(currentTown.getTreasure());
+                currentTown.setSearched();
+
+
+            }
+            else{
+                System.out.println("The town has already been searched");
+            }
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
         } else {
