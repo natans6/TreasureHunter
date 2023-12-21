@@ -168,6 +168,14 @@ public class Hunter {
         if (!kitIsEmpty()) {
             str += " and " + getInventory();
         }
+        str += "\nTreasures Found: ";
+        if(treasureListIsEmpty()) {
+            str += "none";
+        }else{
+            for(int i=0;i<treasureList.length;i++) {
+                str +=treasureList[i] + " ";
+            }
+        }
         return str;
     }
 
