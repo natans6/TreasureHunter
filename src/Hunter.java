@@ -173,10 +173,30 @@ public class Hunter {
             str += "none";
         }else{
             for(int i=0;i<treasureList.length;i++) {
-                str +=treasureList[i] + " ";
+                if(treasureList[i]!=null) {
+                    if(i>=1){
+                        str += ", ";
+                    }
+                    str += treasureList[i];
+                }
             }
         }
         return str;
+    }
+
+    /**
+     * Checks if player has all 3 treasures so that the player can win.
+     *
+     *
+     * */
+    public boolean checkWin(){
+        if((findItemInTreasureList("A gem")!=-1)&&(findItemInTreasureList("A crown")!=-1)&&(findItemInTreasureList("A trophy")!=-1)){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
     /**
