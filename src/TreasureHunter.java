@@ -20,6 +20,7 @@ public class TreasureHunter {
     private String BLUE = "\u001B[34m";
     private String RED = "\u001B[31m";
     private String GREEN = "\u001B[32m";
+    private int x = 0;
     /**
      * Constructs the Treasure Hunter game.
      */
@@ -91,7 +92,7 @@ public class TreasureHunter {
         // creating the new Town -- which we need to store as an instance
         // variable in this class, since we need to access the Town
         // object in other methods of this class
-        currentTown = new Town(shop, toughness, true);
+        currentTown = new Town(shop, toughness);
 
         // calling the hunterArrives method, which takes the Hunter
         // as a parameter; note this also could have been done in the
@@ -153,18 +154,25 @@ public class TreasureHunter {
             currentTown.lookForTrouble();
         } else if(choice.equals("h")){
             System.out.println("You found " + currentTown.getTreasure());
-        } else if (choice.equals("d")){
-            hunter.digForGold();
             if(!currentTown.getSearched()) {
                 System.out.println("You found " + currentTown.getTreasure());
                 hunter.addTreasure(currentTown.getTreasure());
                 currentTown.setSearched();
-
-
             }
             else{
+                System.out.println("You already dug for gold in this town.");
+            }
+        } else if (choice.equals("d")){
+            if(!currentTown.getSearched()){
+                if (hunter.digForGold()){
+                    currentTown.setSearched();
+                } else{
+                    System.out.println("You can't dig for gold without a shovel.");
+                }
+            } else {
                 System.out.println("The town has already been searched");
             }
+            Town.printMessage = "";
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
         } else {

@@ -11,7 +11,6 @@ public class Hunter {
 
     private String[] treasureList;
     private int gold;
-    private Town town;
 
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
@@ -22,7 +21,6 @@ public class Hunter {
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
         kit = new String[7]; // only 7 possible items can be stored in kit with boots and a shovel
-        kit = new String[6]; // only 6 possible items can be stored in kit with boots
         treasureList = new String[3];
         gold = startingGold;
     }
@@ -61,7 +59,7 @@ public class Hunter {
         return true;
     }
 
-    public void digForGold(){
+    public boolean digForGold(){
         if (hasItemInKit("shovel")){
             int randChance = (int) (Math.random() * 2) + 1;
             if (randChance == 1){
@@ -71,14 +69,10 @@ public class Hunter {
             } else {
                 System.out.println("You dug but only found dirt.");
             }
-            town.setCheckedTown(true);
-
+            return true;
         } else {
-            System.out.println("You can't dig for gold without a shovel.");
+            return false;
         }
-       if (town.getCheckedTown() == true){
-           System.out.println("You already dug for gold in this town.");
-       }
     }
 
     /**
@@ -255,8 +249,6 @@ public class Hunter {
     }
     public void addTreasure(String treasure){
         boolean contains = false;
-
-
             if(findItemInTreasureList(treasure)!=-1){
                 System.out.println("You won't collect this because you already have it but the town is searched.");
             }else if(treasure.equals("dust")){

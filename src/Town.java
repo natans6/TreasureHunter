@@ -9,13 +9,12 @@ public class Town {
     private Hunter hunter;
     private Shop shop;
     private Terrain terrain;
-    private String printMessage;
+    public static String printMessage;
     private boolean toughTown;
     int treasureNum = (int) (Math.random() * 4);
     private String treasure;
     private boolean beenSearched;
 
-    private boolean checkedTown;
     private String TEXT_RESET  = "\u001B[0m";
     private String YELLOW = "\u001B[33m";
     private String RED = "\u001B[31m";
@@ -27,7 +26,7 @@ public class Town {
      * @param shop The town's shoppe.
      * @param toughness The surrounding terrain.
      */
-    public Town(Shop shop, double toughness, boolean checkedTown) {
+    public Town(Shop shop, double toughness) {
         this.shop = shop;
         this.terrain = getNewTerrain();
         this.beenSearched = false;
@@ -36,7 +35,6 @@ public class Town {
         // gets called from a client class
         hunter = null;
 
-        checkedTown = false;
 
         printMessage = "";
 
@@ -59,12 +57,7 @@ public class Town {
     public String getLatestNews() {
         return printMessage;
     }
-    public boolean getCheckedTown(){
-        return checkedTown;
-    }
-    public void setCheckedTown(boolean newCheckedTown){
-        checkedTown = newCheckedTown;
-    }
+
     /**
      * Assigns an object to the Hunter in town.
      *
@@ -80,6 +73,7 @@ public class Town {
             printMessage += YELLOW + "\nWe're just a sleepy little town with mild mannered folk." + TEXT_RESET;
         }
     }
+
 
     /**
      * Handles the action of the Hunter leaving the town.
@@ -103,9 +97,6 @@ public class Town {
         return false;
     }
 
-    public String getPrintMessage(){
-        return printMessage;
-    }
 
     /**
      * Handles calling the enter method on shop whenever the user wants to access the shop.
