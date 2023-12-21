@@ -34,8 +34,6 @@ public class Town {
         // the hunter gets set using the hunterArrives method, which
         // gets called from a client class
         hunter = null;
-
-
         printMessage = "";
 
         // higher toughness = more likely to be a tough town
@@ -85,7 +83,7 @@ public class Town {
         if (canLeaveTown) {
             String item = terrain.getNeededItem();
             printMessage = YELLOW + "You used your " + item + " to cross the " + terrain.getTerrainName() + "." + TEXT_RESET;
-            if (checkItemBreak()) {
+            if (checkItemBreak() && TreasureHunter.itemBreak) {
                 hunter.removeItemFromKit(item);
                 printMessage += YELLOW + "\nUnfortunately, you lost your " + item + "." + TEXT_RESET;
             }
@@ -174,7 +172,7 @@ public class Town {
      */
     private boolean checkItemBreak() {
         double rand = Math.random();
-        return (rand < 0.5);
+        return (rand < 0.99);
     }
     public void setSearched(){
         beenSearched = true;

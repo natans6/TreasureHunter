@@ -16,6 +16,8 @@ public class TreasureHunter {
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
+    private boolean easyMode;
+    public static boolean itemBreak;
     private String TEXT_RESET  = "\u001B[0m";
     private String BLUE = "\u001B[34m";
     private String RED = "\u001B[31m";
@@ -29,6 +31,8 @@ public class TreasureHunter {
         currentTown = null;
         hunter = null;
         hardMode = false;
+        easyMode = false;
+        itemBreak = true;
     }
 
     /**
@@ -50,7 +54,7 @@ public class TreasureHunter {
         String name = SCANNER.nextLine().toLowerCase();
 
 
-        System.out.print("Hard mode? (y/n or test): ");
+        System.out.print("(E)asy, (N)ormal, or (H)ard Mode / (Test) Mode: ");
         String hard = SCANNER.nextLine().toLowerCase();
 
         if (hard.equals("test")) {
@@ -62,11 +66,14 @@ public class TreasureHunter {
             hunter.buyItem("boat", 1);
             hunter.buyItem("boots", 1);
             hunter.buyItem("shovel", 1);
-        } else if (hard.equals("y")) {
+        } else if (hard.equals("h")) {
             hunter = new Hunter(name, 10);
             hardMode = true;
-        } else {
+        } else if (hard.equals("n")){
             hunter = new Hunter(name, 10);
+        } else if (hard.equals("e")){
+            hunter = new Hunter(name, 20);
+            easyMode = true;
         }
     }
 
@@ -82,6 +89,11 @@ public class TreasureHunter {
 
             // and the town is "tougher"
             toughness = 0.75;
+        }
+        if (easyMode){
+            markdown = 1;
+            toughness = 0.25;
+            itemBreak = false;
         }
 
         // note that we don't need to access the Shop object
@@ -160,7 +172,7 @@ public class TreasureHunter {
                 currentTown.setSearched();
             }
             else{
-                System.out.println("You already dug for gold in this town.");
+                System.out.println("You have already searched this town.");
             }
         } else if (choice.equals("d")){
             if(!currentTown.getSearched()){
