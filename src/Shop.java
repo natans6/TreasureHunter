@@ -16,6 +16,9 @@ public class Shop {
     private static final int BOOTS_COST = 8;
     private static final int SHOVEL_COST = 8;
 
+    private static final int SAMURAI_SWORD_COST = 0;
+    public static boolean addSamuraiSword;
+
     // static variables
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -46,10 +49,14 @@ public class Shop {
             System.out.println("Welcome to the shop! We have the finest wares in town.");
             System.out.println("Currently we have the following items:");
             System.out.println(inventory());
-            System.out.print("What're you lookin' to buy? ");
+            System.out.print("What're you lookin' to buy?");
             String item = SCANNER.nextLine().toLowerCase();
             int cost = checkMarketPrice(item, true);
-            if (cost == 0) {
+            if(item.equals("samurai sword")){
+                System.out.println("You've got it.");
+                hunter.addSamurai();
+            }
+            else if (cost == 0) {
                 System.out.println("We ain't got none of those.");
             } else {
                 System.out.print("It'll cost you " + cost + " gold. Buy it (y/n)? ");
@@ -91,7 +98,9 @@ public class Shop {
         str += "Boat: " + BOAT_COST + " gold\n";
         str += "Boots: " + BOOTS_COST + " gold\n";
         str += "Shovel: " + SHOVEL_COST + " gold";
-
+        if(addSamuraiSword){
+            str+= "\nSamurai Sword: "+ 0 + " gold";
+        }
         return str;
     }
 
@@ -104,7 +113,15 @@ public class Shop {
         int costOfItem = checkMarketPrice(item, true);
         if (customer.buyItem(item, costOfItem)) {
             System.out.println("Ye' got yerself a " + item + ". Come again soon.");
-        } else {
+        } else if((customer.hasItemInKit("Samurai Sword"))){
+            if(customer.addItemButPublic(item)) {
+                System.out.println("Oh my, thats quite a blade. This one's on the house. Ye' got yerself a " + item + ". Come again soon.");
+            }
+            else{
+                System.out.println("Sir- You've already got that one, I can't do anything. P-please try to pick something, anything else from our extensive inventory.");
+            }
+        }
+        else {
             System.out.println("Hmm, either you don't have enough gold or you've already got one of those!");
         }
     }

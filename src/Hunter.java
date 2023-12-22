@@ -8,6 +8,7 @@ public class Hunter {
     //instance variables
     private String hunterName;
     private String[] kit;
+    private boolean samurai;
 
     private String[] treasureList;
     private int gold;
@@ -20,9 +21,14 @@ public class Hunter {
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
-        kit = new String[7]; // only 7 possible items can be stored in kit with boots and a shovel
+        if(TreasureHunter.samuraiMode1) {
+            kit = new String[8];
+        }else{
+            kit = new String[7]; //only 7 possible items can be stored in kit with boots and a shovel
+        }
         treasureList = new String[3];
         gold = startingGold;
+        samurai= false;
     }
 
     //Accessors
@@ -50,14 +56,17 @@ public class Hunter {
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
-        if (costOfItem == 0 || gold < costOfItem || hasItemInKit(item)) {
+        if (((costOfItem == 0)&&!(item.equals("Samurai Sword"))) || gold < costOfItem || hasItemInKit(item)) {
             return false;
         }
 
-        gold -= costOfItem;
+        if(!(hasItemInKit("Samurai Sword"))){
+            gold -= costOfItem;
+        }
         addItem(item);
         return true;
     }
+
 
     public boolean digForGold(){
         if (hasItemInKit("shovel")){
@@ -122,6 +131,19 @@ public class Hunter {
         }
 
         return false;
+    }
+    public boolean addItemButPublic(String item){
+        if (!hasItemInKit(item)) {
+            int idx = emptyPositionInKit();
+            kit[idx] = item;
+            return true;
+        }
+
+        return false;
+    }
+    public void addSamurai(){
+        int idx = emptyPositionInKit();
+        kit[idx] = "Samurai Sword";
     }
 
     /**
@@ -286,4 +308,15 @@ public class Hunter {
                 treasureList[emptyPositionInTreasureList()] = treasure;
             }
         }
+    public boolean getSamurai(){
+        return samurai;
+    }
+    public void setSamuraitoTrue(){
+        this.samurai = true;
+    }
+    public void kitWithSamurai(){
+        kit = new String[8];
+
+
+    }
 }

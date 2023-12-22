@@ -130,7 +130,11 @@ public class Town {
                 printMessage += GREEN + "Okay, stranger! You proved yer mettle. Here, take my gold." + TEXT_RESET;
                 printMessage += GREEN + "\nYou won the brawl and receive " + goldDiff + " gold." + TEXT_RESET;
                 hunter.changeGold(goldDiff);
-            } else {
+            } else if(hunter.hasItemInKit("Samurai Sword")){
+                printMessage += GREEN + "My apologies sir didn't know ye were one of 'em ninjas" + TEXT_RESET;
+                printMessage += GREEN + "\nThe opponent willingly hands over " + goldDiff + " gold because of cowardness." + TEXT_RESET;
+            }
+            else {
                 printMessage += RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!" + TEXT_RESET;
                 printMessage += RED + "\nYou lost the brawl and pay " + goldDiff + " gold." + TEXT_RESET;
                 hunter.changeGold(-goldDiff);
@@ -158,7 +162,11 @@ public class Town {
         } else if (rnd == 3) {
             return new Terrain("Desert", "Water");
         } else if (rnd == 4){
-            return new Terrain("Jungle", "Machete");
+            if(Shop.addSamuraiSword){return new Terrain("Jungle", "Samurai Sword");
+            }else{
+                return new Terrain("Jungle", "Machete");
+            }
+
         } else {
             return new Terrain("Marsh", "Boots");
         }

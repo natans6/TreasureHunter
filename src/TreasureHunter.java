@@ -17,7 +17,9 @@ public class TreasureHunter {
     private Hunter hunter;
     private boolean hardMode;
     private boolean easyMode;
+    private boolean samuraiMode;
     public static boolean itemBreak;
+    public static boolean samuraiMode1;
     private String TEXT_RESET  = "\u001B[0m";
     private String BLUE = "\u001B[34m";
     private String RED = "\u001B[31m";
@@ -32,6 +34,7 @@ public class TreasureHunter {
         hunter = null;
         hardMode = false;
         easyMode = false;
+        samuraiMode = false;
         itemBreak = true;
     }
 
@@ -74,6 +77,13 @@ public class TreasureHunter {
         } else if (hard.equals("e")){
             hunter = new Hunter(name, 20);
             easyMode = true;
+        } else if (hard.equals("s")){
+            hunter = new Hunter(name, 15);
+            hunter.setSamuraitoTrue();
+            Shop.addSamuraiSword=true;
+            samuraiMode1 = true;
+            hunter.kitWithSamurai();
+
         }
     }
 
@@ -156,6 +166,9 @@ public class TreasureHunter {
         if(win==true){
             System.out.println("Congratulations, you have found the last of the three treasures, you win!");
         }
+    }
+    public boolean getSamuraiMode(){
+        return samuraiMode;
     }
 
     /**
