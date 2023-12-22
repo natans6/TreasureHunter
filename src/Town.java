@@ -14,6 +14,7 @@ public class Town {
     int treasureNum = (int) (Math.random() * 4);
     private String treasure;
     private boolean beenSearched;
+    private boolean beenDug;
 
     private String TEXT_RESET  = "\u001B[0m";
     private String YELLOW = "\u001B[33m";
@@ -30,6 +31,7 @@ public class Town {
         this.shop = shop;
         this.terrain = getNewTerrain();
         this.beenSearched = false;
+        this.beenDug = false;
 
         // the hunter gets set using the hunterArrives method, which
         // gets called from a client class
@@ -179,5 +181,11 @@ public class Town {
     }
     public boolean getSearched(){
         return beenSearched;
+    }
+    public void setDug(){
+        beenDug = true;
+    }
+    public boolean getDug(){
+        return beenDug;
     }
 }

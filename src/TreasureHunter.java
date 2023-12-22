@@ -119,9 +119,14 @@ public class TreasureHunter {
      * This method will loop until the user chooses to exit.
      */
     private void showMenu() {
-        String choice = "";
 
+        String choice = "";
+        boolean win = false;
         while (!choice.equals("x")) {
+            if(hunter.checkWin()){
+                win = true;
+                break;
+            }
             System.out.println();
             System.out.println(currentTown.getLatestNews());
             System.out.println("***");
@@ -143,10 +148,14 @@ public class TreasureHunter {
                 System.out.println(currentTown.getLatestNews());
                 System.out.println("***");
                 System.out.println(hunter);
+                win=false;
                 break;
             }
+
         }
-        System.out.println("Game Over!");
+        if(win==true){
+            System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+        }
     }
 
     /**
@@ -175,14 +184,14 @@ public class TreasureHunter {
             }
             Town.printMessage = "";
         } else if (choice.equals("d")){
-            if(!currentTown.getSearched()){
+            if(!currentTown.getDug()){
                 if (hunter.digForGold()){
-                    currentTown.setSearched();
+                    currentTown.setDug();
                 } else{
                     System.out.println("You can't dig for gold without a shovel.");
                 }
             } else {
-                System.out.println("The town has already been searched");
+                System.out.println("The town has already been dug for gold.");
             }
             Town.printMessage = "";
         } else if (choice.equals("x")) {
