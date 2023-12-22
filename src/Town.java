@@ -182,7 +182,7 @@ public class Town {
      */
     private boolean checkItemBreak() {
         double rand = Math.random();
-        return (rand < 0.99);
+        return (rand < 0.5);
     }
     public void setSearched(){
         beenSearched = true;
